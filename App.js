@@ -1,0 +1,53 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Login from "./screens/Login";
+import { db, onAuthStateChanged, auth } from "./FirebaseConfig";
+import Main from "./screens/Main";
+import AddTraining from "./screens/AddTraining";
+import AddDog from "./screens/AddDog";
+import History from "./screens/History";
+import { useEffect, useState } from "react";
+
+const Stack = createNativeStackNavigator();
+const InsideStack = createNativeStackNavigator();
+
+function InsideLayout() {
+  return (
+    <InsideStack.Navigator>
+      <InsideStack.Screen name="Main" component={Main} />
+      <InsideStack.Screen name="Add Training" component={AddTraining} />
+      <InsideStack.Screen name="Add Dog" component={AddDog} />
+      <InsideStack.Screen name="History" component={History} />
+    </InsideStack.Navigator>
+  );
+}
+
+export default function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      console.log("user", user);
+      setUser(user);
+    });
+  }, []);
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        {user ? (
+          <Stack.Screen
+            name="Inside"
+            component={InsideLayout}
+            options={{ headerShown: false }}
+          />
+        ) : (
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
