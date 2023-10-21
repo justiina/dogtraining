@@ -1,8 +1,6 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { View, Text } from "react-native";
 
 export default function History() {
-  return (
-    <Text>History</Text>
-  )
+  return <Text>Training History</Text>;
 }

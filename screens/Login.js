@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   Button,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import {
@@ -25,7 +26,7 @@ export default function Login() {
       console.log(response);
     } catch (error) {
       console.log(error);
-      alert("Sign in failed: " + error.message);
+      Alert.alert("Something went wrong... Please try again.");
     } finally {
       setLoading(false);
     }
@@ -40,9 +41,9 @@ export default function Login() {
         password
       );
       console.log(response);
-      alert("Check your emails!");
     } catch (error) {
       console.log(error);
+      Alert.alert("Something went wrong... Please try again.");
     } finally {
       setLoading(false);
     }
@@ -71,10 +72,14 @@ export default function Login() {
         ) : (
           <>
             <View style={styles.button}>
-              <Button title="Login" onPress={signIn} />
+              <Button title="Login" color="#00a6b1ff" onPress={signIn} />
             </View>
             <View style={styles.button}>
-              <Button title="Create account" onPress={signUp} />
+              <Button
+                title="Create account"
+                color="#f79e08ff"
+                onPress={signUp}
+              />
             </View>
           </>
         )}
@@ -85,12 +90,12 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
     flex: 1,
     justifyContent: "center",
     marginVertical: 4,
   },
   input: {
+    marginHorizontal: 20,
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
@@ -99,6 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   button: {
+    marginHorizontal: 20,
     marginVertical: 4,
   },
 });

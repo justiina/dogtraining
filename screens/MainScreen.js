@@ -2,19 +2,33 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { auth } from "../FirebaseConfig/";
 import { Button } from "react-native";
-import AddTraining from "./AddTraining";
 
-export default function Main({ navigation }) {
+export default function MainScreen({ navigation }) {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.button}>
         <Button
           onPress={() => navigation.navigate("Add Training")}
-          title="Add training"
+          title="Add Training"
+          color="#555555"
         />
       </View>
       <View style={styles.button}>
-        <Button onPress={() => auth.signOut()} title="Logout" />
+        <Button
+          onPress={() => navigation.navigate("Training History")}
+          title="Training History"
+          color="#555555"
+        />
+      </View>
+      <View style={styles.button}>
+        <Button
+          onPress={() => navigation.navigate("Add Dog")}
+          title="Add A Dog"
+          color="#555555"
+        />
+      </View>
+      <View style={styles.button}>
+        <Button onPress={() => auth.signOut()} title="Logout" color="#777777" />
       </View>
     </View>
   );
@@ -22,12 +36,12 @@ export default function Main({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
     flex: 1,
     justifyContent: "center",
     marginVertical: 4,
   },
   input: {
+    marginHorizontal: 20,
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
@@ -36,6 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   button: {
+    marginHorizontal: 20,
     marginVertical: 4,
   },
 });
