@@ -7,11 +7,13 @@ import {
   Platform,
   Pressable,
   TextInput,
+  ScrollView,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import DropDownPicker from "react-native-dropdown-picker";
+import RadioButton from "../components/RadioButton";
 
 export default function AddTraining() {
+  const [trainingType, setTrainingType] = useState(1);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
@@ -19,26 +21,16 @@ export default function AddTraining() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
 
-  const [openType, setOpenType] = useState(false);
-  const [valueType, setValueType] = useState(null);
-  const [itemsType, setItemsType] = useState([
-    { label: "Tracking", value: "tracking" },
-    { label: "Searching", value: "searching" },
-  ]);
+  const trainingTypes = [
+    { label: "Tracking", value: 1 },
+    { label: "Searching", value: 2 },
+    { label: "SAR", value: 3 },
+  ];
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
-
-    let tempDate = new Date(currentDate);
-    let formattedDate =
-      tempDate.getDate() +
-      "." +
-      (tempDate.getMonth() + 1) +
-      "." +
-      tempDate.getFullYear();
-    let formattedTime = tempDate.getHours() + ":" + tempDate.getMinutes();
   };
 
   const showMode = (currentMode) => {
@@ -48,56 +40,60 @@ export default function AddTraining() {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.section}>
-        <Pressable onPress={() => showMode("date")}>
-          <Text>Date</Text>
-          <Text style={styles.input}>
-            {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
-          </Text>
-        </Pressable>
-        <Pressable onPress={() => showMode("time")}>
-          <Text>Start time</Text>
-          <Text style={styles.input}>
-            {date.getHours()}:{date.getMinutes()}
-          </Text>
-        </Pressable>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
+      <ScrollView nestedScrollEnabled={true}>
+
+        <View style={styles.section}>
+          <Text style={styles.heading}>Training type</Text>
+          <RadioButton
+            options={trainingTypes}
+            onChangeValue={(value) => setTrainingType(value)}
           />
-        )}
-      </View>
-      <View style={styles.section}>
-        <Text>Duration</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="hours"
-          keyboardType="number-pad"
-        ></TextInput>
-        <TextInput
-          style={styles.input}
-          placeholder="minutes"
-          keyboardType="number-pad"
-        ></TextInput>
-      </View>
-      <View style={styles.section}>
-        <Text>Training type</Text>
-        <DropDownPicker
-          style={styles.input}
-          open={openType}
-          value={valueType}
-          items={itemsType}
-          setOpen={setOpenType}
-          setValue={setValueType}
-          setItems={setItemsType}
-        />
-      </View>
-      <View style={styles.section}></View>
+        </View>
+
+        <View style={styles.section}>
+          <Pressable onPress={() => showMode("date")}>
+            <Text style={styles.heading}>Date</Text>
+            <Text style={styles.input}>
+              {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
+            </Text>
+          </Pressable>
+          <Pressable onPress={() => showMode("time")}>
+            <Text style={styles.heading}>Start time</Text>
+            <Text style={styles.input}>
+              {date.getHours()}:{date.getMinutes()}
+            </Text>
+          </Pressable>
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          )}
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.heading}>Duration</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="hours"
+            keyboardType="number-pad"
+          ></TextInput>
+          <TextInput
+            style={styles.input}
+            placeholder="minutes"
+            keyboardType="number-pad"
+          ></TextInput>
+        </View>
+
+        <View style={styles.section}></View>
+        
+        <View style={styles.section}></View>
+        <View style={styles.section}></View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
@@ -106,20 +102,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    marginVertical: 4,
   },
   section: {
     marginHorizontal: 20,
     marginVertical: 4,
-    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: "#F15BB5",
+    padding: 4,
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 4,
   },
   input: {
-    marginHorizontal: 20,
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderRadius: 4,
-    padding: 10,
+    borderColor: "grey",
+    borderRadius: 50,
+    paddingLeft: 20,
     backgroundColor: "#fff",
+    fontSize: 20,
+    textAlignVertical: "center",
   },
 });

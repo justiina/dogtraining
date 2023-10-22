@@ -6,6 +6,8 @@ import {
   Button,
   KeyboardAvoidingView,
   Alert,
+  Pressable,
+  Text,
 } from "react-native";
 import React, { useState } from "react";
 import {
@@ -58,6 +60,7 @@ export default function Login() {
           placeholder="Email"
           autoCapitalize="none"
           onChangeText={(text) => setEmail(text)}
+          keyboardType="email-address"
         ></TextInput>
         <TextInput
           style={styles.input}
@@ -71,16 +74,12 @@ export default function Login() {
           <ActivityIndicator size="large" color="#000ff" />
         ) : (
           <>
-            <View style={styles.button}>
-              <Button title="Login" color="#00a6b1ff" onPress={signIn} />
-            </View>
-            <View style={styles.button}>
-              <Button
-                title="Create account"
-                color="#f79e08ff"
-                onPress={signUp}
-              />
-            </View>
+            <Pressable style={styles.button} onPress={signIn}>
+              <Text style={styles.buttonText}>Login</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress={signUp}>
+              <Text style={styles.buttonText}>Create account</Text>
+            </Pressable>
           </>
         )}
       </KeyboardAvoidingView>
@@ -92,19 +91,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    marginHorizontal: 50,
     marginVertical: 4,
   },
   input: {
-    marginHorizontal: 20,
-    marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderRadius: 4,
-    padding: 10,
+    borderRadius: 50,
+    paddingLeft: 20,
+    fontSize: 20,
     backgroundColor: "#fff",
+    marginVertical: 4,
   },
   button: {
-    marginHorizontal: 20,
+    borderRadius: 50,
+    backgroundColor: "#F15BB5",
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
     marginVertical: 4,
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

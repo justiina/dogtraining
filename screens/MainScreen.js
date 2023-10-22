@@ -1,35 +1,31 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable, Button, Text } from "react-native";
 import { auth } from "../FirebaseConfig/";
-import { Button } from "react-native";
 
 export default function MainScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <View style={styles.button}>
-        <Button
-          onPress={() => navigation.navigate("Add Training")}
-          title="Add Training"
-          color="#555555"
-        />
-      </View>
-      <View style={styles.button}>
-        <Button
-          onPress={() => navigation.navigate("Training History")}
-          title="Training History"
-          color="#555555"
-        />
-      </View>
-      <View style={styles.button}>
-        <Button
-          onPress={() => navigation.navigate("Add Dog")}
-          title="Add A Dog"
-          color="#555555"
-        />
-      </View>
-      <View style={styles.button}>
-        <Button onPress={() => auth.signOut()} title="Logout" color="#777777" />
-      </View>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Add Training")}
+      >
+        <Text style={styles.buttonText}>Add Training</Text>
+      </Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Training History")}
+      >
+        <Text style={styles.buttonText}>Training History</Text>
+      </Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Add Dog")}
+      >
+        <Text style={styles.buttonText}>Add A Dog</Text>
+      </Pressable>
+      <Pressable style={styles.buttonLogout} onPress={() => auth.signOut()}>
+        <Text style={styles.buttonText}>Logout</Text>
+      </Pressable>
     </View>
   );
 }
@@ -38,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    marginVertical: 4,
+    marginHorizontal: 50,
   },
   input: {
     marginHorizontal: 20,
@@ -50,7 +46,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   button: {
-    marginHorizontal: 20,
-    marginVertical: 4,
+    borderRadius: 50,
+    backgroundColor: '#F15BB5',
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 4
+  },
+  buttonLogout: {
+    borderRadius: 50,
+    backgroundColor: '#00F5D4',
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 40
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
