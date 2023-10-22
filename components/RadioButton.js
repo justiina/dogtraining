@@ -17,7 +17,7 @@ export default function RadioButton({ options, onChangeValue }) {
             style={styles.circle}
             onPress={() => handlePress(item.value)}
           >
-            {value === item.value && <View style={styles.checked} />}
+            {value === item.value && <View style={styles.checked} key={item.value} />}
           </Pressable>
           <Text style={{fontSize: 20}}>{item.label}</Text>
         </View>

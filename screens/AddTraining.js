@@ -11,8 +11,9 @@ import {
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import RadioButton from "../components/RadioButton";
+import Position from "../components/Position";
 
-export default function AddTraining() {
+export default function AddTraining(props) {
   const [trainingType, setTrainingType] = useState(1);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
@@ -31,6 +32,7 @@ export default function AddTraining() {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
+    setDateUnix(currentDate.getTime() / 1000)
   };
 
   const showMode = (currentMode) => {
@@ -41,7 +43,6 @@ export default function AddTraining() {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <ScrollView nestedScrollEnabled={true}>
-
         <View style={styles.section}>
           <Text style={styles.heading}>Training type</Text>
           <RadioButton
@@ -89,8 +90,15 @@ export default function AddTraining() {
           ></TextInput>
         </View>
 
-        <View style={styles.section}></View>
-        
+        <View style={styles.section}>
+          <Text style={styles.heading}>Location</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="type the location"
+          ></TextInput>
+          <Position />
+        </View>
+
         <View style={styles.section}></View>
         <View style={styles.section}></View>
       </ScrollView>
