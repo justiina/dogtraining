@@ -11,7 +11,7 @@ export default function Weather(props) {
   const [description, setDescription] = useState("");
   const [windSpeed, setWindSpeed] = useState(0); // m/s
   const [windDeg, setWindDeg] = useState(0); //wind direction, degrees (meteorological)
-  
+
   useEffect(() => {
     const url =
       api.url +
@@ -29,8 +29,8 @@ export default function Weather(props) {
         console.log(json);
         setTemp(json.main.temp);
         setDescription(json.weather[0].description);
-        setWindSpeed(json.wind.speed)
-        setWindDeg(json.wind.deg)
+        setWindSpeed(json.wind.speed);
+        setWindDeg(json.wind.deg);
       })
       .catch((error) => {
         setDescription("Error retreiving weather information.");

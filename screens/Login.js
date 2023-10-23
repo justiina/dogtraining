@@ -3,7 +3,6 @@ import {
   StyleSheet,
   TextInput,
   ActivityIndicator,
-  Button,
   KeyboardAvoidingView,
   Alert,
   Pressable,
@@ -77,8 +76,8 @@ export default function Login() {
             <Pressable style={styles.button} onPress={signIn}>
               <Text style={styles.buttonText}>Login</Text>
             </Pressable>
-            <Pressable style={styles.button} onPress={signUp}>
-              <Text style={styles.buttonText}>Create account</Text>
+            <Pressable style={{ alignItems: "center" }} onPress={signUp}>
+              <Text style={styles.text}>Or create account</Text>
             </Pressable>
           </>
         )}
@@ -109,10 +108,17 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 4,
+    marginVertical: 10,
   },
   buttonText: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#9B5DE5",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

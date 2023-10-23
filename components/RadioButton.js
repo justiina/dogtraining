@@ -17,9 +17,11 @@ export default function RadioButton({ options, onChangeValue }) {
             style={styles.circle}
             onPress={() => handlePress(item.value)}
           >
-            {value === item.value && <View style={styles.checked} key={item.value} />}
+            {value === item.value && (
+              <View style={styles.checked} key={item.value} />
+            )}
           </Pressable>
-          <Text style={{fontSize: 20}}>{item.label}</Text>
+          <Text style={{ fontSize: 20 }}>{item.label}</Text>
         </View>
       ))}
     </>
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     paddingLeft: 10,
-    marginBottom: 4,
+    marginBottom: 10,
   },
   circle: {
     height: 24,

@@ -47,22 +47,22 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 50,
-    backgroundColor: '#F15BB5',
+    backgroundColor: "#F15BB5",
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 4
+    marginVertical: 4,
   },
   buttonLogout: {
     borderRadius: 50,
-    backgroundColor: '#00F5D4',
+    backgroundColor: "#00F5D4",
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 40
+    marginVertical: 40,
   },
   buttonText: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
