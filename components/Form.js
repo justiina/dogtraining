@@ -55,39 +55,36 @@ export default function Form() {
       <Text style={styles.heading}>{stepTitle[step]}</Text>
       <View>{stepDisplay()}</View>
       <View style={styles.buttonContainer}>
-        <Pressable
-          disabled={step === 0}
-          style={styles.button}
-          onPress={() => {
-            setStep((currStep) => currStep - 1);
-          }}
-        >
-          <Text style={styles.buttonText}>Prev</Text>
-        </Pressable>
-        <Pressable
-          style={styles.button}
-          onPress={() => {
-            setStep((currStep) => currStep + 1);
-          }}
-        >
-          <Text style={styles.buttonText}>Next</Text>
-        </Pressable>
+        {step > 0 && (
+          <Pressable
+            style={styles.buttonPrev}
+            onPress={() => {
+              setStep((currStep) => currStep - 1);
+            }}
+          >
+            <Text style={styles.buttonText}>Prev</Text>
+          </Pressable>
+        )}
+        {step < 2 && (
+          <Pressable
+            style={styles.buttonNext}
+            onPress={() => {
+              setStep((currStep) => currStep + 1);
+            }}
+          >
+            <Text style={styles.buttonText}>Next</Text>
+          </Pressable>
+        )}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-  },
   buttonContainer: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    padding: 10,
   },
   section: {
     marginHorizontal: 20,
@@ -114,13 +111,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlignVertical: "center",
   },
-  button: {
+  buttonNext: {
     borderRadius: 50,
-    backgroundColor: "#F15BB5",
+    backgroundColor: "#00F5D4",
     padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 10,
+    marginLeft: "auto",
+    marginVertical: 20,
+    marginHorizontal: 20,
+  },
+  buttonPrev: {
+    borderRadius: 50,
+    backgroundColor: "#00F5D4",
+    padding: 20,
+    marginRight: "auto",
+    marginVertical: 20,
+    marginHorizontal: 20,
   },
   buttonText: {
     fontSize: 20,

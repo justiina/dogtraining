@@ -13,9 +13,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function FormStep1({ formData, setFormData }) {
   const trainingTypes = [
-    { label: "Tracking", value: 0 },
-    { label: "Searching", value: 1 },
-    { label: "SAR", value: 2 },
+    { label: "Tracking", value: 1 },
+    { label: "Searching", value: 2 },
+    { label: "SAR", value: 3 },
   ];
 
   const [date, setDate] = useState(new Date());
@@ -49,24 +49,35 @@ export default function FormStep1({ formData, setFormData }) {
             onChangeValue={(value) =>
               setFormData({
                 ...formData,
-                trainingType: trainingTypes[value].label,
+                trainingType: trainingTypes[value - 1].label,
               })
             }
           />
         </View>
 
         <View style={styles.section}>
-          <Pressable onPress={() => showModeDate("date")}>
-            <Text style={styles.heading}>Date</Text>
-            <Text style={styles.input}>
-              {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
-            </Text>
+          <Text style={styles.heading}>Time</Text>
+
+          <Pressable style={styles.button} onPress={() => showModeDate("date")}>
+            {formData.dateTime === "" ? (
+              <Text style={styles.buttonText}>Select date</Text>
+            ) : (
+              <Text style={styles.buttonText}>
+                {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
+              </Text>
+            )}
           </Pressable>
-          <Pressable onPress={() => showModeDate("time")}>
-            <Text style={styles.heading}>Start time</Text>
-            <Text style={styles.input}>
-              {date.getHours()}:{date.getMinutes()}
-            </Text>
+          <Pressable style={styles.button} onPress={() => showModeDate("time")}>
+            {formData.dateTime === "" ? (
+              <Text style={styles.buttonText}>Select start time</Text>
+            ) : (
+              <Text style={styles.buttonText}>
+                {date.getHours()}:
+                {date.getMinutes() < 10
+                  ? `0${date.getMinutes()}`
+                  : date.getMinutes()}
+              </Text>
+            )}
           </Pressable>
           {showDate && (
             <DateTimePicker
@@ -137,7 +148,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 4,
   },
   buttonText: {
     fontSize: 20,
