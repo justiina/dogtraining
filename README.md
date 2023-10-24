@@ -1,1 +1,1 @@
-# React Native App of dog training diary
+# Dog training diary App (React Native)
