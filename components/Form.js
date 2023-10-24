@@ -1,5 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import React, { useState } from "react";
+import { auth } from "../FirebaseConfig/";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
@@ -8,22 +9,23 @@ export default function Form() {
   // state to collect the dat from the form
   const [formData, setFormData] = useState({
     // step 1 - training type and time
+    userId: auth.currentUser.uid,
     trainingType: "",
     dateTime: "",
     duration: "",
 
     // step 2 - training conditions
     locationName: "",
-    lat: 0,
-    lon: 0,
-    temp: 0,
-    clouds: 0,
-    windSpeed: 0,
-    windDir: 0,
+    lat: "",
+    lon: "",
+    temp: "",
+    clouds: "",
+    windSpeed: "",
+    windDir: "",
     weatherFromUser: "",
 
     // step 3 - feedback and notes
-    points: 0,
+    points: "",
     notes: "",
     remember: "",
   });
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
   },
   buttonNext: {
     borderRadius: 50,
-    backgroundColor: "#00F5D4",
+    backgroundColor: "#F15BB5",
     padding: 20,
     marginLeft: "auto",
     marginVertical: 20,
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
   },
   buttonPrev: {
     borderRadius: 50,
-    backgroundColor: "#00F5D4",
+    backgroundColor: "#F15BB5",
     padding: 20,
     marginRight: "auto",
     marginVertical: 20,

@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import Weather from "./Weather";
+import FormStep2 from "./FormStep2";
 
 export default function Position() {
   const [latitude, setLatitude] = useState(0);
@@ -39,7 +40,9 @@ export default function Position() {
         {latitude.toFixed(3)},{longitude.toFixed(3)}
       </Text>
       {isLoading === false && (
-        <Weather latitude={latitude} longitude={longitude} />
+        <>
+          <Weather latitude={latitude} longitude={longitude} />
+        </>
       )}
     </View>
   );

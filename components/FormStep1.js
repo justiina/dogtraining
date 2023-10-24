@@ -7,15 +7,15 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
-import React, { useState, useEffect } from "react";
-import RadioButton from "./RadioButton";
+import React, { useState } from "react";
+import { SelectList } from "react-native-dropdown-select-list";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function FormStep1({ formData, setFormData }) {
   const trainingTypes = [
-    { label: "Tracking", value: 1 },
-    { label: "Searching", value: 2 },
-    { label: "SAR", value: 3 },
+    { key: "1", value: "Tracking" },
+    { key: "2", value: "Searching" },
+    { key: "3", value: "SAR" },
   ];
 
   const [date, setDate] = useState(new Date());
@@ -34,30 +34,26 @@ export default function FormStep1({ formData, setFormData }) {
     setModeDate(currentMode);
   };
 
-  // [REMOVE WHEN COMPONENT IS READY!!] follow-up the changes in formData
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   return (
     <KeyboardAvoidingView>
       <ScrollView nestedScrollEnabled={true}>
         <View style={styles.section}>
           <Text style={styles.heading}>Training type</Text>
-          <RadioButton
-            options={trainingTypes}
-            onChangeValue={(value) =>
+          <SelectList
+            placeholder="Select from list"
+            setSelected={(val) =>
               setFormData({
                 ...formData,
-                trainingType: trainingTypes[value - 1].label,
+                trainingType: val,
               })
             }
+            data={trainingTypes}
+            save="value"
           />
         </View>
 
         <View style={styles.section}>
           <Text style={styles.heading}>Time</Text>
-
           <Pressable style={styles.button} onPress={() => showModeDate("date")}>
             {formData.dateTime === "" ? (
               <Text style={styles.buttonText}>Select date</Text>
@@ -85,7 +81,7 @@ export default function FormStep1({ formData, setFormData }) {
               value={date}
               mode={modeDate}
               is24Hour={true}
-              display="default"
+              display={Platform.OS === "ios" ? "inline" : "default"}
               onChange={onChangeDate}
             />
           )}
@@ -112,6 +108,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  section: {
+    marginHorizontal: 20,
+    borderBottomWidth: 1,
+    borderColor: "#F15BB5",
+    padding: 20,
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 4,
+  },
   buttonContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -119,17 +126,17 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
   },
-  section: {
-    marginHorizontal: 20,
-    marginVertical: 4,
-    borderBottomWidth: 1,
-    borderColor: "#F15BB5",
-    padding: 4,
-  },
-  heading: {
+  buttonText: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 4,
+  },
+  button: {
+    borderRadius: 50,
+    backgroundColor: "orchid",
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 4,
   },
   input: {
     marginVertical: 4,
@@ -141,17 +148,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     fontSize: 20,
     textAlignVertical: "center",
-  },
-  button: {
-    borderRadius: 50,
-    backgroundColor: "#F15BB5",
-    padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 4,
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: "bold",
   },
 });
