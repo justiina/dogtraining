@@ -5,27 +5,10 @@ import {
   TextInput,
   KeyboardAvoidingView,
   ScrollView,
-  Pressable,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import Position from "./Position";
+import React from "react";
 
 export default function FormStep2({ formData, setFormData }) {
-  const [showLocation, setShowLocation] = useState(false);
-
-  // [REMOVE WHEN COMPONENT IS READY!!] follow-up the changes in formData
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
-  // locationName: "",
-  // lat: "",
-  // lon: "",
-  // temp: "",
-  // clouds: "",
-  // windSpeed: "",
-  // windDir: "",
-  // weatherFromUser: "",
 
   return (
     <KeyboardAvoidingView>
@@ -40,28 +23,41 @@ export default function FormStep2({ formData, setFormData }) {
             }
           ></TextInput>
         </View>
+        <View style={styles.section}>
+          <Text style={styles.heading}>Temperature</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="temperature"
+            onChangeText={(text) =>
+              setFormData({ ...formData, temperature: text })
+            }
+          ></TextInput>
+        </View>
 
         <View style={styles.section}>
-          <Pressable
-            style={styles.button}
-            onPress={() => setShowLocation(!showLocation)}
-          >
-            <Text style={styles.buttonText}>Show coordinates</Text>
-          </Pressable>
-          {showLocation ? <Position /> : null}
+          <Text style={styles.heading}>Wind</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="wind speed (m/s)"
+            onChangeText={(text) =>
+              setFormData({ ...formData, windspeed: text })
+            }
+          ></TextInput>
+                    <TextInput
+            style={styles.input}
+            placeholder="wind direction"
+            onChangeText={(text) =>
+              setFormData({ ...formData, winddirection: text })
+            }
+          ></TextInput>
         </View>
+
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    marginHorizontal: 50,
-    marginVertical: 4,
-  },
   section: {
     marginHorizontal: 20,
     borderBottomWidth: 1,

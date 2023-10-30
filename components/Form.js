@@ -1,13 +1,22 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Alert } from "react-native";
 import React, { useState } from "react";
-import { auth } from "../FirebaseConfig/";
+import {
+  auth,
+  db,
+  TRAININGS,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "../FirebaseConfig/";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Form() {
   // state to collect the dat from the form
   const [formData, setFormData] = useState({
+
     // step 1 - training type and time
     userId: auth.currentUser.uid,
     trainingType: "",
@@ -16,18 +25,13 @@ export default function Form() {
 
     // step 2 - training conditions
     locationName: "",
-    lat: "",
-    lon: "",
-    temp: "",
-    clouds: "",
-    windSpeed: "",
-    windDir: "",
-    weatherFromUser: "",
+    temperature: "",
+    windspeed: "",
+    winddirection: "",
 
     // step 3 - feedback and notes
     points: "",
     notes: "",
-    remember: "",
   });
 
   // state to keep track over form steps
@@ -50,6 +54,20 @@ export default function Form() {
       case 2:
         return <FormStep3 formData={formData} setFormData={setFormData} />;
     }
+  };
+
+  // navigate to main screen after after save
+  const navigation = useNavigation()
+
+  // save the form data
+  const save = async () => {
+    const docRef = await addDoc(collection(db, TRAININGS), {
+      formData,
+      created: serverTimestamp(),
+    }).catch((error) => console.log(error));
+    setFormData({});
+    Alert.alert("Data saved!");
+    console.log("Data saved");
   };
 
   return (
@@ -75,6 +93,17 @@ export default function Form() {
             }}
           >
             <Text style={styles.buttonText}>Next</Text>
+          </Pressable>
+        )}
+        {step === 2 && (
+          <Pressable
+            style={styles.buttonSave}
+            onPress={() => {
+              save();
+              navigation.goBack()
+            }}
+          >
+            <Text style={styles.buttonText}>Save</Text>
           </Pressable>
         )}
       </View>
@@ -126,6 +155,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#F15BB5",
     padding: 20,
     marginRight: "auto",
+    marginVertical: 20,
+    marginHorizontal: 20,
+  },
+  buttonSave: {
+    borderRadius: 50,
+    backgroundColor: "#00F5D4",
+    padding: 20,
+    marginLeft: "auto",
     marginVertical: 20,
     marginHorizontal: 20,
   },

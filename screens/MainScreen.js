@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Pressable, Button, Text } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import { auth } from "../FirebaseConfig/";
 
 export default function MainScreen({ navigation }) {
