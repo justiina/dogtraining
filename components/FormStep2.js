@@ -14,7 +14,7 @@ export default function FormStep2({ formData, setFormData }) {
     <KeyboardAvoidingView>
       <ScrollView nestedScrollEnabled={true}>
         <View style={styles.section}>
-          <Text style={styles.heading}>Location</Text>
+          <Text style={styles.header}>Location</Text>
           <TextInput
             style={styles.input}
             placeholder="name of the location"
@@ -24,7 +24,7 @@ export default function FormStep2({ formData, setFormData }) {
           ></TextInput>
         </View>
         <View style={styles.section}>
-          <Text style={styles.heading}>Temperature</Text>
+          <Text style={styles.header}>Temperature</Text>
           <TextInput
             style={styles.input}
             placeholder="temperature"
@@ -35,7 +35,7 @@ export default function FormStep2({ formData, setFormData }) {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.heading}>Wind</Text>
+          <Text style={styles.header}>Wind</Text>
           <TextInput
             style={styles.input}
             placeholder="wind speed (m/s)"
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     borderColor: "#F15BB5",
     padding: 20,
   },
-  heading: {
+  header: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 4,

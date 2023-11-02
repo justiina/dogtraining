@@ -6,6 +6,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
 import { SelectList } from "react-native-dropdown-select-list";
@@ -35,69 +36,77 @@ export default function FormStep1({ formData, setFormData }) {
   };
 
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : 'height'}>
       <ScrollView nestedScrollEnabled={true}>
-        <View style={styles.section}>
-          <Text style={styles.heading}>Training type</Text>
-          <SelectList
-            placeholder="Select from list"
-            setSelected={(val) =>
-              setFormData({
-                ...formData,
-                trainingType: val,
-              })
-            }
-            data={trainingTypes}
-            save="value"
-          />
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.heading}>Time</Text>
-          <Pressable style={styles.button} onPress={() => showModeDate("date")}>
-            {formData.dateTime === "" ? (
-              <Text style={styles.buttonText}>Select date</Text>
-            ) : (
-              <Text style={styles.buttonText}>
-                {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
-              </Text>
-            )}
-          </Pressable>
-          <Pressable style={styles.button} onPress={() => showModeDate("time")}>
-            {formData.dateTime === "" ? (
-              <Text style={styles.buttonText}>Select start time</Text>
-            ) : (
-              <Text style={styles.buttonText}>
-                {date.getHours()}:
-                {date.getMinutes() < 10
-                  ? `0${date.getMinutes()}`
-                  : date.getMinutes()}
-              </Text>
-            )}
-          </Pressable>
-          {showDate && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={modeDate}
-              is24Hour={true}
-              display={Platform.OS === "ios" ? "inline" : "default"}
-              onChange={onChangeDate}
+        <SafeAreaView style={styles.container}>
+          <View style={styles.section}>
+            <Text style={styles.header}>Training type</Text>
+            <SelectList
+              placeholder="Select from list"
+              setSelected={(val) =>
+                setFormData({
+                  ...formData,
+                  trainingType: val,
+                })
+              }
+              data={trainingTypes}
+              save="value"
             />
-          )}
-        </View>
+          </View>
 
-        <View style={styles.section}>
-          <Text style={styles.heading}>Duration</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="hours"
-            keyboardType="number-pad"
-            onChangeText={(text) =>
-              setFormData({ ...formData, duration: text })
-            }
-          ></TextInput>
-        </View>
+          <View style={styles.section}>
+            <Text style={styles.header}>Time</Text>
+            <Pressable
+              style={styles.button}
+              onPress={() => showModeDate("date")}
+            >
+              {formData.dateTime === "" ? (
+                <Text style={styles.buttonText}>Select date</Text>
+              ) : (
+                <Text style={styles.buttonText}>
+                  {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
+                </Text>
+              )}
+            </Pressable>
+            <Pressable
+              style={styles.button}
+              onPress={() => showModeDate("time")}
+            >
+              {formData.dateTime === "" ? (
+                <Text style={styles.buttonText}>Select start time</Text>
+              ) : (
+                <Text style={styles.buttonText}>
+                  {date.getHours()}:
+                  {date.getMinutes() < 10
+                    ? `0${date.getMinutes()}`
+                    : date.getMinutes()}
+                </Text>
+              )}
+            </Pressable>
+            {showDate && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={modeDate}
+                is24Hour={true}
+                display={Platform.OS === "ios" ? "inline" : "default"}
+                onChange={onChangeDate}
+              />
+            )}
+          </View>
+
+          <View style={styles.section}>
+            <Text style={styles.header}>Duration</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="hours"
+              keyboardType="number-pad"
+              onChangeText={(text) =>
+                setFormData({ ...formData, duration: text })
+              }
+            ></TextInput>
+          </View>
+        </SafeAreaView>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -106,15 +115,15 @@ export default function FormStep1({ formData, setFormData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
   },
   section: {
+    flex: 1,
     marginHorizontal: 20,
     borderBottomWidth: 1,
     borderColor: "#F15BB5",
     padding: 20,
   },
-  heading: {
+  header: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 4,

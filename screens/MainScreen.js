@@ -17,12 +17,6 @@ export default function MainScreen({ navigation }) {
       >
         <Text style={styles.buttonText}>Training History</Text>
       </Pressable>
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Add Dog")}
-      >
-        <Text style={styles.buttonText}>Add A Dog</Text>
-      </Pressable>
       <Pressable style={styles.buttonLogout} onPress={() => auth.signOut()}>
         <Text style={styles.buttonText}>Logout</Text>
       </Pressable>

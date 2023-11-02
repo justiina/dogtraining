@@ -72,7 +72,7 @@ export default function Form() {
 
   return (
     <View>
-      <Text style={styles.heading}>{stepTitle[step]}</Text>
+      <Text style={styles.header}>{stepTitle[step]}</Text>
       <View>{stepDisplay()}</View>
       <View style={styles.buttonContainer}>
         {step > 0 && (
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     borderColor: "#F15BB5",
     padding: 4,
   },
-  heading: {
+  header: {
     fontSize: 28,
     fontWeight: "bold",
     marginTop: 20,

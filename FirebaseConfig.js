@@ -7,6 +7,7 @@ import {
   query,
   onSnapshot,
   orderBy,
+  where
 } from "firebase/firestore";
 import {
   getAuth,
@@ -45,4 +46,5 @@ export {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  where
 };

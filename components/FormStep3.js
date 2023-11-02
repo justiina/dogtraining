@@ -23,7 +23,7 @@ export default function FormStep3({ formData, setFormData }) {
     <KeyboardAvoidingView>
       <ScrollView nestedScrollEnabled={true}>
           <View style={styles.section}>
-            <Text style={styles.heading}>How did the training go?</Text>
+            <Text style={styles.header}>How did the training go?</Text>
             <RadioButton
               options={pointOptions}
               onChangeValue={(value) =>
@@ -32,7 +32,7 @@ export default function FormStep3({ formData, setFormData }) {
             />
           </View>
           <View style={styles.section}>
-            <Text style={styles.heading}>Notes</Text>
+            <Text style={styles.header}>Notes</Text>
             <TextInput
               style={[styles.input, styles.multilineText]}
               placeholder="temperature"
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderColor: "#F15BB5",
     padding: 20
   },
-  heading: {
+  header: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 4,

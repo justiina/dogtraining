@@ -1,10 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./screens/Login";
-import { db, onAuthStateChanged, auth } from "./FirebaseConfig";
+import { onAuthStateChanged, auth } from "./FirebaseConfig";
 import MainScreen from "./screens/MainScreen";
 import AddTraining from "./screens/AddTraining";
-import AddDog from "./screens/AddDog";
 import History from "./screens/History";
 import { useEffect, useState } from "react";
 
@@ -16,7 +15,6 @@ function InsideLayout() {
     <InsideStack.Navigator>
       <InsideStack.Screen name="Main" component={MainScreen} />
       <InsideStack.Screen name="Add Training" component={AddTraining} />
-      <InsideStack.Screen name="Add Dog" component={AddDog} />
       <InsideStack.Screen name="Training History" component={History} />
     </InsideStack.Navigator>
   );
@@ -31,6 +29,7 @@ export default function App() {
       setUser(user);
     });
   }, []);
+  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
