@@ -11,8 +11,7 @@ import {
   where,
 } from "../FirebaseConfig";
 import { convertTimeStampToJS } from "../helpers/Functions";
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function History() {
   const [trainings, setTrainings] = useState([]);
@@ -51,7 +50,11 @@ export default function History() {
   const showStars = (count) => {
     const stars = [];
     for (let i = 0; i < count; i++) {
-      stars.push(<Text key={i}><Icon name="star" size={20} color="#9B5DE5"/></Text>);
+      stars.push(
+        <Text key={i}>
+          <Icon name="star" size={20} color="#9B5DE5" />
+        </Text>
+      );
     }
     return stars;
   };
@@ -66,7 +69,7 @@ export default function History() {
               <Text>{training.locationName}</Text>
             </View>
             <View style={styles.row}>
-              <Text  style={styles.header}>{training.type}</Text>
+              <Text style={styles.header}>{training.type}</Text>
               <Text>
                 {training.temperature}&deg;C, {training.windspeed} m/s
               </Text>
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingBottom: 4
+    paddingBottom: 4,
   },
   header: {
     fontSize: 20,
@@ -105,11 +108,11 @@ const styles = StyleSheet.create({
   },
   notes: {
     fontSize: 16,
-    marginBottom: 4
+    marginBottom: 4,
   },
 
   stars: {
     flexDirection: "row",
-    paddingTop: 4
-  }
+    paddingTop: 4,
+  },
 });

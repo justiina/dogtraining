@@ -35,7 +35,7 @@ export default function FormStep3({ formData, setFormData }) {
             <Text style={styles.header}>Notes</Text>
             <TextInput
               style={[styles.input, styles.multilineText]}
-              placeholder="temperature"
+              placeholder="notes"
               multiline
               onChangeText={(text) => setFormData({ ...formData, notes: text })}
             ></TextInput>
@@ -88,7 +88,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "grey",
     borderRadius: 50,
+    paddingTop: 4,
+    paddingBottom: 4,
     paddingLeft: 20,
+    paddingRight: 20,
     backgroundColor: "#fff",
     fontSize: 20,
     textAlignVertical: "center",

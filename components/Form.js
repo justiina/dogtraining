@@ -16,7 +16,6 @@ import { useNavigation } from "@react-navigation/native";
 export default function Form() {
   // state to collect the dat from the form
   const [formData, setFormData] = useState({
-
     // step 1 - training type and time
     userId: auth.currentUser.uid,
     trainingType: "",
@@ -57,7 +56,7 @@ export default function Form() {
   };
 
   // navigate to main screen after after save
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   // save the form data
   const save = async () => {
@@ -100,7 +99,7 @@ export default function Form() {
             style={styles.buttonSave}
             onPress={() => {
               save();
-              navigation.goBack()
+              navigation.goBack();
             }}
           >
             <Text style={styles.buttonText}>Save</Text>

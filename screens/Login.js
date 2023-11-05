@@ -56,7 +56,7 @@ export default function Login() {
         <TextInput
           style={styles.input}
           value={email}
-          placeholder="Email"
+          placeholder="email"
           autoCapitalize="none"
           onChangeText={(text) => setEmail(text)}
           keyboardType="email-address"
@@ -65,7 +65,7 @@ export default function Login() {
           style={styles.input}
           value={password}
           secureTextEntry={true}
-          placeholder="Password"
+          placeholder="password"
           autoCapitalize="none"
           onChangeText={(text) => setPassword(text)}
         ></TextInput>

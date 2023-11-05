@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { SelectList } from "react-native-dropdown-select-list";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function FormStep1({ formData, setFormData }) {
   const trainingTypes = [
@@ -34,15 +35,16 @@ export default function FormStep1({ formData, setFormData }) {
     setShowDate(true);
     setModeDate(currentMode);
   };
-
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : 'height'}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <ScrollView nestedScrollEnabled={true}>
         <SafeAreaView style={styles.container}>
           <View style={styles.section}>
             <Text style={styles.header}>Training type</Text>
             <SelectList
-              placeholder="Select from list"
+              placeholder="select from list"
               setSelected={(val) =>
                 setFormData({
                   ...formData,
