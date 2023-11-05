@@ -16,11 +16,10 @@ Login screen  |  Main screen
 :------------:|:---------------: 
 ![login screen](/assets/01-login.PNG "Login screen")| ![main screen after login](/assets/02-main.PNG "Main screen")
 
-Add training 1 | Add training 2 | Add training 3 | Training history
-:---------------:|:--------------:|:-------------:|:-----------------:
-![add training screen 1](/assets/03-form1.PNG "Add training screen 1") | ![add training screen 2](/assets/04-form2.PNG "Add training screen 2") |![add training screen 3](/assets/05-form3.PNG "Add training screen 3")| ![training history](/assets/06-history.PNG "Training history")  
+Add training 1 | Add training 2
+:---------------:|:--------------:
+![add training screen 1](/assets/03-form1.PNG "Add training screen 1") | ![add training screen 2](/assets/04-form2.PNG "Add training screen 2")
 
-
- 
- 
-
+Add training 3 | Training history
+:-------------:|:-----------------:
+![add training screen 3](/assets/05-form3.PNG "Add training screen 3")| ![training history](/assets/06-history.PNG "Training history") 
